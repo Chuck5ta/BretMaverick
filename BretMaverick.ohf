@@ -17,17 +17,162 @@
 //
 //*****************************************************************************
 
-##DefaultPreflop##
+##f$preflop##
+// Loose play
+// ----------
+// *** Unraised pot *** 
+WHEN f$LooseGame && f$UnraisedPot && InEarlyPosition 
+    WHEN listLooseEarlyUnraisedPotRaise Raise FORCE
+    WHEN listLooseEarlyUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$UnraisedPot && InMiddlePosition
+    WHEN listLooseMiddleUnraisedPotRaise Raise FORCE
+    WHEN listLooseMiddleUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$UnraisedPot && InLatePosition
+    WHEN listLooseLateUnraisedPotRaise Raise FORCE
+    WHEN listLooseLateUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$UnraisedPot && InSmallBlind
+    WHEN listLooseSmallBlindUnraisedPotRaise Raise FORCE
+    WHEN listLooseSmallBlindUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$UnraisedPot && InBigBlind
+    WHEN listLooseBigBlindUnraisedPotRaise Raise FORCE
+    When Others Fold Force
+// *** Raised pot ***
+WHEN f$LooseGame && f$RaisedPot && InEarlyPosition 
+    WHEN listLooseEarlyAgainstRaisedPotRaise Raise FORCE
+    WHEN listLooseEarlyAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$RaisedPot && InMiddlePosition 
+    WHEN listLooseMiddleAgainstRaisedPotRaise Raise FORCE
+    WHEN listLooseMiddleAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$RaisedPot && InLatePosition 
+    WHEN listLooseLateAgainstRaisedPotRaise Raise FORCE
+    WHEN listLooseLateAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$RaisedPot && InSmallBlind 
+    WHEN listLooseSmallBlindAgainstRaisedPotRaise Raise FORCE
+    WHEN listLooseSmallBlindAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$RaisedPot && InBigBlind 
+    WHEN listLooseBigBlindAgainstRaisedPotRaise Raise FORCE
+    WHEN listLooseBigBlindAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+// *** Reraised pot *** 
+WHEN f$LooseGame && f$ReraisedPot && InEarlyPosition 
+    WHEN listLooseEarlyAgainstReraisedPotRaise Raise FORCE
+    WHEN listLooseEarlyAgainstReraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$ReraisedPot && InMiddlePosition 
+    WHEN listLooseEarlyAgainstReraisedPotRaise Raise FORCE
+    WHEN listLooseMiddleAgainstReraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$LooseGame && f$ReraisedPot && InLatePosition 
+    WHEN listLooseLateAgainstReraisedPotRaise Raise FORCE
+    WHEN listLooseLateAgainstReraisedPotCall Call FORCE
+    When Others Fold Force
+      
+// Tight play
+// *** Unraised pot *** 
+WHEN f$TightGame && f$UnraisedPot && InEarlyPosition 
+    WHEN listTightEarlyUnraisedPotRaise Raise FORCE
+    WHEN listTightEarlyUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$UnraisedPot && InMiddlePosition 
+    WHEN listTightMiddleUnraisedPotRaise Raise FORCE
+    WHEN listTightMiddleUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$UnraisedPot && InLatePosition 
+    WHEN listTightLateUnraisedPotRaise Raise FORCE
+    WHEN listTightLateUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$UnraisedPot && InSmallBlind 
+    WHEN listTightSmallBlindUnraisedPotRaise Raise FORCE
+    WHEN listTightSmallBlindUnraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$UnraisedPot && InBigBlind 
+    WHEN listTightBigBlindUnraisedPotRaise Raise FORCE
+    When Others Fold Force
+// *** Raised pot ***
+WHEN f$TightGame && f$RaisedPot && InEarlyPosition 
+    WHEN listTightEarlyAgainstRaisedPotRaise Raise FORCE
+    WHEN listTightEarlyAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$RaisedPot && InMiddlePosition 
+    WHEN listTightMiddleAgainstRaisedPotRaise Raise FORCE
+    WHEN listTightMiddleAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$RaisedPot && InLatePosition 
+    WHEN listTightLateAgainstRaisedPotRaise Raise FORCE
+    WHEN listTightLateAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$RaisedPot && InSmallBlind 
+    WHEN listTightSmallBlindAgainstRaisedPotRaise Raise FORCE
+    WHEN listTightSmallBlindAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$RaisedPot && InBigBlind 
+    WHEN listTightBigBlindAgainstRaisedPotRaise Raise FORCE
+    WHEN listTightBigBlindAgainstRaisedPotCall Call FORCE
+    When Others Fold Force
+// *** Reraised pot *** 
+WHEN f$TightGame && f$RaisedPot && InEarlyPosition 
+    WHEN listTightEarlyAgainstReraisedPotRaise Raise FORCE
+    WHEN listTightEarlyAgainstReraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$RaisedPot && InMiddlePosition 
+    WHEN listTightMiddleAgainstReraisedPotRaise Raise FORCE
+    WHEN listTightMiddleAgainstReraisedPotCall Call FORCE
+    When Others Fold Force
+WHEN f$TightGame && f$RaisedPot && InLatePosition 
+    WHEN listTightLateAgainstReraisedPotRaise Raise FORCE
+    WHEN listTightLateAgainstReraisedPotCall Call FORCE
+    When Others Fold Force
+
+// We can do nothing - Texas Fold 'Em
+When Others Fold Force
+
+##f$flop##
+
+// We can do nothing - Texas Fold 'Em
+When Others Fold Force
+
+##f$turn##
 
 
-##DefaultFlop##
+// We can do nothing - Texas Fold 'Em
+When Others Fold Force
+##f$river##
 
 
-##DefaultTurn##
+// We can do nothing - Texas Fold 'Em
+When Others Fold Force
 
 
-##DefaultRiver##
 
+   
+//*****************************************************************************
+//
+// Symbols for the BretMaverick-bot
+//
+//*****************************************************************************
+
+##f$TightGame##
+nplayersplaying >= 1 && nplayersplaying <= 5
+
+##f$LooseGame##
+nplayersplaying >= 6 && nplayersplaying <= 10
+
+##f$UnraisedPot##
+!RaisesBeforeFlop
+
+##f$RaisedPot##
+RaisesBeforeFlop
+
+##f$ReraisedPot##
+NumberOfRaisesBeforeFlop > 1
 
    
 //*****************************************************************************
@@ -37,8 +182,7 @@
 //*****************************************************************************
 
 
-
-// PREFLOB LISTS
+// PREFLOP LISTS
 // =============
 
 // LOOSE GAMES (3 to 5 players)
@@ -46,6 +190,13 @@
 
 // Early Position
 // ~~~~~~~~~~~~~~
+
+##listLooseEarlyUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo AJo
+KQo
 
 // unraised pot
 ##listLooseEarlyUnraisedPotCall##
@@ -58,14 +209,12 @@ T9s 98s
 ATo
 KJo
 
-##listLooseEarlyUnraisedPotRaise##
-AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
-KQs KJs
-AKo AQo AJo
-KQo
-
 // Raised pot
+##listLooseEarlyAgainstRaisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs
+AKo AQo
+
 ##listLooseEarlyAgainstRaisedPotCall##
 88 77 66 55 44 33 22
 AJs ATs
@@ -73,21 +222,16 @@ KQs KJs KTs
 QJs
 JTs
 
-##listLooseEarlyAgainstRaisedPotRaise##
-AA KK QQ JJ TT 99
-AKs AQs
-AKo AQo
-
 // raised then reraised pot
+##listLooseEarlyAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
 ##listLooseEarlyAgainstReraisedPotCall##
 JJ TT
 AQs AJs
 KQs
 AKo
-
-##listLooseEarlyAgainstReraisedPotRaise##
-AA KK QQ
-AKs
 
 // ~~~~~~~~~~~~~~~
 // Middle Position
@@ -125,6 +269,12 @@ KQs
 ##listLooseMiddleAgainstReraisedPotRaise##
 AA KK QQ
 AKs
+
+##listLooseMiddleAgainstReraisedPotCall##
+JJ TT
+AQs AJs
+KQs
+AKo
 
 // ~~~~~~~~~~~~~~~
 // Late Position
@@ -166,6 +316,12 @@ QJs JTs T9s
 ##listLooseLateAgainstReraisedPotRaise##
 AA KK QQ
 AKs
+
+##listLooseLateAgainstReraisedPotCall##
+JJ TT
+AQs AJs
+KQs
+AKo
 
 // ~~~~~~~~~~~~~~~~~~~~
 // Small Blind Position
@@ -291,11 +447,9 @@ JTs T9s
 ATo
 KJo
 
-// Raised pot
-##listTightMiddleAgainstRaisedPotRaise##
 
 // Raised pot
-##listTightEarlyAgainstRaisedPotRaise##
+##listTightMiddleAgainstRaisedPotRaise##
 AA KK QQ JJ TT 99
 AKs AQs
 AKo AQo
