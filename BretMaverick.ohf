@@ -1,0 +1,478 @@
+##f$BretMaverick_notes##
+//*****************************************************************************
+//
+// OpenPPL default bot
+//   This bot-logic will be executed on undefined situations
+//
+// OpenPPL is part of the OpenHoldem project
+//   Source code:           http://code.google.com/p/openholdembot/
+//   Download page:         https://sites.google.com/site/openholdempokerbot/downloads
+//   Forums:                http://www.maxinmontreal.com/forums/index.php
+//   Licensed under GPL v3: http://www.gnu.org/licenses/gpl.html
+//
+// The original PPL (Poker Programming Language) got invented by
+//   Shanky Bonusbots:      http://bonusbots.com/support/index.php
+//
+// Required OpenHoldem version: 12.0.0 or later
+//
+//*****************************************************************************
+
+##DefaultPreflop##
+
+
+##DefaultFlop##
+
+
+##DefaultTurn##
+
+
+##DefaultRiver##
+
+
+   
+//*****************************************************************************
+//
+// Hand-lists for the BretMaverick-bot
+//
+//*****************************************************************************
+
+
+
+// PREFLOB LISTS
+// =============
+
+// LOOSE GAMES (3 to 5 players)
+// ------------
+
+// Early Position
+// ~~~~~~~~~~~~~~
+
+// unraised pot
+##listLooseEarlyUnraisedPotCall##
+88 77 66 55 44 33 22
+A9s A8s A7s A6s A5s A4s A3s A2s
+KTs K9s
+QJs QTs Q9s
+JTs J9s
+T9s 98s
+ATo
+KJo
+
+##listLooseEarlyUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo AJo
+KQo
+
+// Raised pot
+##listLooseEarlyAgainstRaisedPotCall##
+88 77 66 55 44 33 22
+AJs ATs
+KQs KJs KTs
+QJs
+JTs
+
+##listLooseEarlyAgainstRaisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs
+AKo AQo
+
+// raised then reraised pot
+##listLooseEarlyAgainstReraisedPotCall##
+JJ TT
+AQs AJs
+KQs
+AKo
+
+##listLooseEarlyAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
+// ~~~~~~~~~~~~~~~
+// Middle Position
+// ~~~~~~~~~~~~~~~
+
+// unraised pot
+##listLooseMiddleUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo AKo AJo
+KQo
+
+##listLooseMiddleUnraisedPotCall##
+88 77 66 55 44 33 22
+A9s A8s A7s A6s A5s A4s A3s A2s
+KTs K9s
+QJs QTs Q9s
+JTs J9s
+T9s 98s
+ATo
+KJo
+
+// Raised pot
+##listLooseMiddleAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs
+AKo
+
+##listLooseMiddleAgainstRaisedPotCall##
+AQs AKs AJs
+KQs
+
+// raised then reraised pot
+##listLooseMiddleAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
+// ~~~~~~~~~~~~~~~
+// Late Position
+// ~~~~~~~~~~~~~~~
+
+// unraised pot
+##listLooseLateUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs A9s A8s
+KQs KJs KTs
+QJs
+AKo AQo AKo AJo ATo
+KQo
+
+##listLooseLateUnraisedPotCall##
+88 77 66 55 44 33 22
+A7s A6s A5s A4s A3s A2s
+K9s
+QJs QTs Q9s
+JTs J9s
+T9s 98s 87s 76s 65s 54s
+KQo KJo KTo
+QJo QTo
+JTo
+
+// Raised pot
+##listLooseLateAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs
+AKo
+
+##listLooseLateAgainstRaisedPotCall##
+99 88 77 66 55 44 33 22
+AQs AKs AJs
+KQo
+QJs JTs T9s
+
+// raised then reraised pot
+##listLooseLateAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Small Blind Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listLooseSmallBlindUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo
+
+##listLooseSmallBlindUnraisedPotCall##
+88 77 66 55 44 33 22
+// Any suited
+AJs ATs
+KQs KJs KTs
+QJs QTs
+JTs
+
+// Raised pot
+##listLooseSmallBlindAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs
+AKo
+
+##listLooseSmallBlindAgainstRaisedPotCall##
+99 88 77 66 55 44 33 22
+AKs AQs AKs AJs
+KQo
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Big Blind Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listLooseBigBlindUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo
+
+// Raised pot
+##listLooseBigBlindAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs
+AKo
+
+##listLooseBigBlindAgainstRaisedPotCall##
+99 88 77 66 55 44 33 22
+AKs AQs AKs AJs
+KQo
+QJs JTs T9s
+
+
+
+// TIGHT GAMES (6 to 8 players)
+// -----------
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Early Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listTightEarlyUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo AKo AJo
+KQo
+
+##listTightEarlyUnraisedPotCall##
+88 77 66 55 44 33 22
+A9s A8s A7s A6s A5s A4s A3s A2s
+KTs K9s
+QJs QTs Q9s
+JTs T9s
+ATo
+KJo
+
+// Raised pot
+##listTightEarlyAgainstRaisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs
+AKo AQo
+
+##listTightEarlyAgainstRaisedPotCall##
+88 77 66 55 44 33 22
+AJs ATs
+KQs KJs KTs
+QJs
+JTs
+
+// raised then reraised pot
+##listTightEarlyAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
+##listTightEarlyAgainstReraisedPotCall##
+JJ TT
+AKs AQs AKs AJs
+KQs
+AKo
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Middle Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listTightMiddleUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKo AQo AKo AJo
+KQo
+
+##listTightMiddleUnraisedPotCall##
+88 77 66 55 44 33 22
+A9s A8s A7s A6s A5s A4s A3s A2s
+KTs K9s
+QJs QTs Q9s
+JTs T9s
+ATo
+KJo
+
+// Raised pot
+##listTightMiddleAgainstRaisedPotRaise##
+
+// Raised pot
+##listTightEarlyAgainstRaisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs
+AKo AQo
+
+##listTightMiddleAgainstRaisedPotCall##
+88 77 66 55 44 33 22
+AJs ATs
+KQs KJs KTs
+QJs
+JTs
+
+// raised then reraised pot
+##listTightMiddleAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
+##listTightMiddleAgainstReraisedPotCall##
+JJ TT
+AKs AQs AKs AJs
+KQs
+AKo
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Late Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listTightLateUnraisedPotRaise##
+AA KK QQ JJ TT 99 88
+AKs AQs AKs AJs ATs A9s A8s
+KQs KJs KTs K9s
+QJs QTs
+JTs
+AKo AQo AKo AJo
+KQo
+
+##listTightLateUnraisedPotCall##
+77 66 55 44 33 22
+A7s A6s A5s A4s A3s A2s
+K8s K7s K6s K5s K4s K3s K2s
+Q9s Q8s
+J9s J8s J7s
+T9s 98s 87s 76s 65s 54s 43s
+T8s 97s 86s 75s 64s 53s
+ATo
+KQo KJo KTo
+QJo QTo
+JTo
+
+// Raised pot
+##listTightLateAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs AQs AKs AJs
+KQs
+AKo
+
+##listTightLateAgainstRaisedPotCall##
+99 88 77 66 55 44 33 22
+ATs A9s A8s A7s A6s A5s A4s A3s A2s
+KJs KTs
+QJs QTs
+JTs T9s 98s 87s 76s
+AQo
+
+// raised then reraised pot
+##listTightLateAgainstReraisedPotRaise##
+AA KK QQ
+AKs
+
+##listTightLateAgainstReraisedPotCall##
+JJ TT
+AKs AQs AKs AJs
+KQs
+AKo
+
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Small Blind Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listTightSmallBlindUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKs AQs
+
+##listTightSmallBlindUnraisedPotCall##
+88 77 66 55 44 33 22
+// Any suited
+AJs ATs
+KQs KJs KTs
+QJs QTs
+JTs
+
+// Raised pot
+##listTightSmallBlindAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs AQs AKs AJs
+KQs
+AKo
+
+##listTightSmallBlindAgainstRaisedPotCall##
+99 88 77 66 55 44 33 22
+ATo
+KJs KTs
+QJs
+JTs
+AQo
+
+// ~~~~~~~~~~~~~~~~~~~~
+// Big Blind Position
+// ~~~~~~~~~~~~~~~~~~~~
+
+// unraised pot
+##listTightBigBlindUnraisedPotRaise##
+AA KK QQ JJ TT 99
+AKs AQs AKs AJs ATs
+KQs KJs
+AKs AQs
+
+// Raised pot
+##listTightBigBlindAgainstRaisedPotRaise##
+AA KK QQ JJ TT
+AKs AQs AKs AJs
+KQs
+AKo
+
+##listTightBigBlindAgainstRaisedPotCall##
+99 88 77 66 55 44 33 22
+ATs A9s A8s A7s A6s A5s A4s A3s A2s
+KJs KTs
+QJs QTs
+JTs T9s 98s 87s 76s
+AQo
+
+
+
+
+
+
+// Any Suited
+##listSuited##
+AKs AQs AKs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
+KQs KJs KTs K9s K8s K7s K6s K5s K4s K3s K2s
+QJs QTs Q9s Q8s Q7s Q6 Q5 Q4 Q3 Q2
+JTs J9s J8s J7s J6s J5s J4s J3s J2s
+T9s T8s T7s T6s T5s T4s T3s T2s
+98s 97s 96s 95s 94s 93s 92s
+87s 86s 85s 84s 83s 82s
+76s 75s 74s 73s 72s
+65s 64s 63s 62s
+54s 53s 52s
+43s 42s
+32s
+
+
+// ALL HANDS
+##listOfAllPreflopHands##
+AA KK QQ JJ TT 99 88 77 66 55 44 33 22
+AKs AQs AKs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
+KQs KJs KTs K9s K8s K7s
+QJs QTs Q9s Q8s Q7s
+JTs J9s J8s
+T9s 98s 87s 76s 65s 54s 43s 32s
+T8s 97s 86s 75s 64s 53s
+AKo AQo AKo AJo ATo
+KQo KJo KTo
+QJo QTo
+JTo
+
+
+
+
+// TIGHT GAMES
+// -----------
+
+
+
+
