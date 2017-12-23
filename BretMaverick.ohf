@@ -18,7 +18,7 @@
 //*****************************************************************************
 
 ##f$preflop##
-// Loose play
+// Loose play (6 to 10 players)
 // ----------
 // *** Unraised pot *** 
 WHEN f$LooseGame && f$UnraisedPot && InEarlyPosition 
@@ -44,7 +44,7 @@ WHEN f$LooseGame && f$UnraisedPot && InBigBlind
 WHEN f$LooseGame && f$RaisedPot && InEarlyPosition 
     WHEN listLooseEarlyAgainstRaisedPotRaise Raise FORCE
     WHEN listLooseEarlyAgainstRaisedPotCall Call FORCE
-    When Others Fold Force
+    When Others Fold Force  
 WHEN f$LooseGame && f$RaisedPot && InMiddlePosition 
     WHEN listLooseMiddleAgainstRaisedPotRaise Raise FORCE
     WHEN listLooseMiddleAgainstRaisedPotCall Call FORCE
@@ -60,12 +60,12 @@ WHEN f$LooseGame && f$RaisedPot && InSmallBlind
 WHEN f$LooseGame && f$RaisedPot && InBigBlind 
     WHEN listLooseBigBlindAgainstRaisedPotRaise Raise FORCE
     WHEN listLooseBigBlindAgainstRaisedPotCall Call FORCE
-    When Others Fold Force
+    When Others Fold Force 
 // *** Reraised pot *** 
 WHEN f$LooseGame && f$ReraisedPot && InEarlyPosition 
     WHEN listLooseEarlyAgainstReraisedPotRaise Raise FORCE
     WHEN listLooseEarlyAgainstReraisedPotCall Call FORCE
-    When Others Fold Force
+    When Others Fold Force   
 WHEN f$LooseGame && f$ReraisedPot && InMiddlePosition 
     WHEN listLooseEarlyAgainstReraisedPotRaise Raise FORCE
     WHEN listLooseMiddleAgainstReraisedPotCall Call FORCE
@@ -75,7 +75,7 @@ WHEN f$LooseGame && f$ReraisedPot && InLatePosition
     WHEN listLooseLateAgainstReraisedPotCall Call FORCE
     When Others Fold Force
       
-// Tight play
+// Tight play (1 to 5 players)
 // *** Unraised pot *** 
 WHEN f$TightGame && f$UnraisedPot && InEarlyPosition 
     WHEN listTightEarlyUnraisedPotRaise Raise FORCE
@@ -118,17 +118,14 @@ WHEN f$TightGame && f$RaisedPot && InBigBlind
     WHEN listTightBigBlindAgainstRaisedPotCall Call FORCE
     When Others Fold Force
 // *** Reraised pot *** 
-WHEN f$TightGame && f$RaisedPot && InEarlyPosition 
-    WHEN listTightEarlyAgainstReraisedPotRaise Raise FORCE
-    WHEN listTightEarlyAgainstReraisedPotCall Call FORCE
+WHEN f$TightGame && f$ReraisedPot && InEarlyPosition 
+    WHEN listLooseEarlyAgainstReraisedPotRaise Raise FORCE
+    When Others Fold Force   
+WHEN f$TightGame && f$ReraisedPot && InMiddlePosition 
+    WHEN listLooseMiddleAgainstReraisedPotRaise Raise FORCE
     When Others Fold Force
-WHEN f$TightGame && f$RaisedPot && InMiddlePosition 
-    WHEN listTightMiddleAgainstReraisedPotRaise Raise FORCE
-    WHEN listTightMiddleAgainstReraisedPotCall Call FORCE
-    When Others Fold Force
-WHEN f$TightGame && f$RaisedPot && InLatePosition 
-    WHEN listTightLateAgainstReraisedPotRaise Raise FORCE
-    WHEN listTightLateAgainstReraisedPotCall Call FORCE
+WHEN f$TightGame && f$ReraisedPot && InLatePosition 
+    WHEN listLooseLateAgainstReraisedPotRaise Raise FORCE
     When Others Fold Force
 
 // We can do nothing - Texas Fold 'Em
@@ -169,8 +166,9 @@ nplayersplaying >= 6 && nplayersplaying <= 10
 !RaisesBeforeFlop
 
 ##f$RaisedPot##
-RaisesBeforeFlop
+NumberOfRaisesBeforeFlop == 1
 
+// gonna have to limit anoy WHEN conditions that use this!
 ##f$ReraisedPot##
 NumberOfRaisesBeforeFlop > 1
 
@@ -257,13 +255,16 @@ KJo
 
 // Raised pot
 ##listLooseMiddleAgainstRaisedPotRaise##
-AA KK QQ JJ TT
-AKs
-AKo
+AA KK QQ JJ TT 99
+AKs AQs
+AKo AQo
 
 ##listLooseMiddleAgainstRaisedPotCall##
-AQs AKs AJs
-KQs
+88 77 66 55 44 33 22
+AJs ATs
+KQs KJs KTs
+QJs
+JTs
 
 // raised then reraised pot
 ##listLooseMiddleAgainstReraisedPotRaise##
@@ -282,20 +283,23 @@ AKo
 
 // unraised pot
 ##listLooseLateUnraisedPotRaise##
-AA KK QQ JJ TT 99
+AA KK QQ JJ TT 99 88
 AKs AQs AKs AJs ATs A9s A8s
-KQs KJs KTs
-QJs
-AKo AQo AKo AJo ATo
+KQs KJs KTs K9s
+QJs QTs
+JTs
+AKo AQo AKo AJo
 KQo
 
 ##listLooseLateUnraisedPotCall##
-88 77 66 55 44 33 22
+77 66 55 44 33 22
 A7s A6s A5s A4s A3s A2s
-K9s
-QJs QTs Q9s
-JTs J9s
-T9s 98s 87s 76s 65s 54s
+K8s K7s K6s K5s K4s K3s K2s
+Q9s Q8s 
+J9s J8s J7s
+T9s 98s 87s 76s 65s 54s 43s
+T8s 97s 86s 75s 64s 53s
+ATo
 KQo KJo KTo
 QJo QTo
 JTo
@@ -303,14 +307,17 @@ JTo
 // Raised pot
 ##listLooseLateAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs
+AKs AQs AKs AJs
+KQs
 AKo
 
 ##listLooseLateAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-AQs AKs AJs
-KQo
-QJs JTs T9s
+ATs A9s A8s A7s A6s A5s A4s A3s A2s
+KJs KTs
+QJs QTs
+JTs T9s 98s 87s 76s
+AQo
 
 // raised then reraised pot
 ##listLooseLateAgainstReraisedPotRaise##
@@ -345,13 +352,17 @@ JTs
 // Raised pot
 ##listLooseSmallBlindAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs
+AKs AQs AKs AJs
+KQs
 AKo
 
 ##listLooseSmallBlindAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-AKs AQs AKs AJs
-KQo
+ATs
+KJs KTs
+QJs
+JTs
+AKo
 
 // ~~~~~~~~~~~~~~~~~~~~
 // Big Blind Position
@@ -367,14 +378,17 @@ AKo AQo
 // Raised pot
 ##listLooseBigBlindAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs
+AKs AQs AKs AJs
+KQs
 AKo
 
 ##listLooseBigBlindAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-AKs AQs AKs AJs
-KQo
-QJs JTs T9s
+ATs A9s A8s A7s A6s A5s A4s A3s A2s
+KJs KTs
+QJs QTs
+JTs T9s 98s 87s 76s
+AQo
 
 
 
@@ -387,44 +401,32 @@ QJs JTs T9s
 
 // unraised pot
 ##listTightEarlyUnraisedPotRaise##
-AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
-KQs KJs
-AKo AQo AKo AJo
-KQo
+AA KK QQ JJ TT
+AKs AQs AJs
+AKo AQo
 
 ##listTightEarlyUnraisedPotCall##
-88 77 66 55 44 33 22
-A9s A8s A7s A6s A5s A4s A3s A2s
-KTs K9s
-QJs QTs Q9s
-JTs T9s
-ATo
-KJo
+99 88 77
+ATs
+KQs KJs KTs
+QJs QTs
+JTs
+KQo
 
 // Raised pot
 ##listTightEarlyAgainstRaisedPotRaise##
-AA KK QQ JJ TT 99
-AKs AQs
-AKo AQo
+AA KK QQ JJ TT
+AKs
+AKo
 
 ##listTightEarlyAgainstRaisedPotCall##
-88 77 66 55 44 33 22
-AJs ATs
-KQs KJs KTs
-QJs
-JTs
+AQs AKs AJs
+KQs
 
 // raised then reraised pot
 ##listTightEarlyAgainstReraisedPotRaise##
-AA KK QQ
+AA KK
 AKs
-
-##listTightEarlyAgainstReraisedPotCall##
-JJ TT
-AKs AQs AKs AJs
-KQs
-AKo
 
 // ~~~~~~~~~~~~~~~~~~~~
 // Middle Position
@@ -443,34 +445,25 @@ KQo
 A9s A8s A7s A6s A5s A4s A3s A2s
 KTs K9s
 QJs QTs Q9s
-JTs T9s
+JTs J9s
+T9s 98s
 ATo
 KJo
 
-
 // Raised pot
 ##listTightMiddleAgainstRaisedPotRaise##
-AA KK QQ JJ TT 99
-AKs AQs
-AKo AQo
+AA KK QQ JJ TT
+AKs
+AKo
 
 ##listTightMiddleAgainstRaisedPotCall##
-88 77 66 55 44 33 22
-AJs ATs
-KQs KJs KTs
-QJs
-JTs
+AQs AKs AJs
+KQs
 
 // raised then reraised pot
 ##listTightMiddleAgainstReraisedPotRaise##
 AA KK QQ
 AKs
-
-##listTightMiddleAgainstReraisedPotCall##
-JJ TT
-AKs AQs AKs AJs
-KQs
-AKo
 
 // ~~~~~~~~~~~~~~~~~~~~
 // Late Position
@@ -478,53 +471,40 @@ AKo
 
 // unraised pot
 ##listTightLateUnraisedPotRaise##
-AA KK QQ JJ TT 99 88
+AA KK QQ JJ TT 99
 AKs AQs AKs AJs ATs A9s A8s
-KQs KJs KTs K9s
-QJs QTs
-JTs
-AKo AQo AKo AJo
+KQs KJs KTs
+QJs
+AKo AQo AKo AJo ATo
 KQo
 
 ##listTightLateUnraisedPotCall##
-77 66 55 44 33 22
+88 77 66 55 44 33 22
 A7s A6s A5s A4s A3s A2s
-K8s K7s K6s K5s K4s K3s K2s
-Q9s Q8s
-J9s J8s J7s
-T9s 98s 87s 76s 65s 54s 43s
-T8s 97s 86s 75s 64s 53s
-ATo
-KQo KJo KTo
+K9s
+QTs Q9s
+JTs J9s
+T9s 98s 87s 76s 65s 54s
+KJo KTo
 QJo QTo
 JTo
 
 // Raised pot
 ##listTightLateAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs AQs AKs AJs
-KQs
+AKs
 AKo
 
 ##listTightLateAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-ATs A9s A8s A7s A6s A5s A4s A3s A2s
-KJs KTs
-QJs QTs
-JTs T9s 98s 87s 76s
-AQo
+AQs AKs AJs
+KQs
+QJs JTs T9s
 
 // raised then reraised pot
 ##listTightLateAgainstReraisedPotRaise##
 AA KK QQ
 AKs
-
-##listTightLateAgainstReraisedPotCall##
-JJ TT
-AKs AQs AKs AJs
-KQs
-AKo
-
 
 // ~~~~~~~~~~~~~~~~~~~~
 // Small Blind Position
@@ -548,17 +528,14 @@ JTs
 // Raised pot
 ##listTightSmallBlindAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs AQs AKs AJs
-KQs
+AKs
 AKo
 
 ##listTightSmallBlindAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-ATo
-KJs KTs
-QJs
-JTs
-AQo
+AQs AKs AJs
+KQs
+QJs QTs
 
 // ~~~~~~~~~~~~~~~~~~~~
 // Big Blind Position
@@ -574,28 +551,20 @@ AKs AQs
 // Raised pot
 ##listTightBigBlindAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs AQs AKs AJs
-KQs
+AKs
 AKo
 
 ##listTightBigBlindAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-ATs A9s A8s A7s A6s A5s A4s A3s A2s
-KJs KTs
-QJs QTs
-JTs T9s 98s 87s 76s
-AQo
-
-
-
-
-
+AQs AKs AJs
+KQs
+QJs JTs T9s
 
 // Any Suited
 ##listSuited##
 AKs AQs AKs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
 KQs KJs KTs K9s K8s K7s K6s K5s K4s K3s K2s
-QJs QTs Q9s Q8s Q7s Q6 Q5 Q4 Q3 Q2
+QJs QTs Q9s Q8s Q7s Q6s Q5s Q4s Q3s Q2s
 JTs J9s J8s J7s J6s J5s J4s J3s J2s
 T9s T8s T7s T6s T5s T4s T3s T2s
 98s 97s 96s 95s 94s 93s 92s
@@ -620,13 +589,4 @@ AKo AQo AKo AJo ATo
 KQo KJo KTo
 QJo QTo
 JTo
-
-
-
-
-// TIGHT GAMES
-// -----------
-
-
-
 
