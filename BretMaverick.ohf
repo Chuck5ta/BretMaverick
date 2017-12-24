@@ -129,23 +129,48 @@ WHEN f$TightGame && f$ReraisedPot && InLatePosition
     When Others Fold Force
 
 // We can do nothing - Texas Fold 'Em
-When Others Fold Force
+WHEN Others Fold Force
 
 ##f$flop##
 
+// If HaveNuts may not want to scare people off yet!!!
+WHEN HaveNuts Raise FORCE
+
+// Test expectation via Pot Equity RAISE?
+// total out * 4 compared to break-even pot odds table
+WHEN (mh_outs * 4 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
+
+// Test expectation via Pot Odds CALL / FOLD
+WHEN f$PotOddsExpectation CALL FORCE
+
+// IMPLIED ODDS
+
 // We can do nothing - Texas Fold 'Em
-When Others Fold Force
+WHEN Others Fold Force
 
 ##f$turn##
 
+// If HaveNuts may not want to scare people off yet!!!
+WHEN HaveNuts Raise FORCE
+
+// Test expectation via Pot Equity RAISE?
+// total out * 2 compared to break-even pot odds table
+WHEN (mh_outs * 2 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
+
+// Test expectation via Pot Odds CALL / FOLD
+WHEN f$PotOddsExpectation CALL FORCE
 
 // We can do nothing - Texas Fold 'Em
 When Others Fold Force
+
 ##f$river##
 
+// Fuck 'em :)
+WHEN HaveNuts Raise FORCE
+
 
 // We can do nothing - Texas Fold 'Em
-When Others Fold Force
+WHEN Others Fold Force
 
 
 
@@ -156,8 +181,9 @@ When Others Fold Force
 //
 //*****************************************************************************
 
+// need to possibly implement a HeadsUpGame symbol ?
 ##f$TightGame##
-nplayersplaying >= 1 && nplayersplaying <= 5
+nplayersplaying >= 2 && nplayersplaying <= 5
 
 ##f$LooseGame##
 nplayersplaying >= 6 && nplayersplaying <= 10
@@ -168,10 +194,28 @@ nplayersplaying >= 6 && nplayersplaying <= 10
 ##f$RaisedPot##
 NumberOfRaisesBeforeFlop == 1
 
-// gonna have to limit anoy WHEN conditions that use this!
+// gonna have to limit any WHEN conditions that use this!
 ##f$ReraisedPot##
 NumberOfRaisesBeforeFlop > 1
 
+##f$PotOddsExpectation##
+WHEN mh_outs > 6 RETURN 1 FORCE // damn good chance
+WHEN mh_outs == 2
+   WHEN ((AmountToCall / PotSize) * 100) >= 22 RETURN 1 FORCE
+   WHEN others RETURN 0 FORCE
+WHEN mh_outs == 3
+   WHEN ((AmountToCall / PotSize) * 100) >= 14.3 RETURN 1 FORCE
+   WHEN others RETURN 0 FORCE
+WHEN mh_outs == 4
+   WHEN ((AmountToCall / PotSize) * 100) >= 10.5 RETURN 1 FORCE
+   WHEN others RETURN 0 FORCE
+WHEN mh_outs == 5
+   WHEN ((AmountToCall / PotSize) * 100) >= 8.2 RETURN 1 FORCE
+   WHEN others RETURN 0 FORCE
+WHEN mh_outs == 6
+   WHEN ((AmountToCall / PotSize) * 100) >= 6.7 RETURN 1 FORCE
+   WHEN others RETURN 0 FORCE
+WHEN others RETURN 0 FORCE
    
 //*****************************************************************************
 //
