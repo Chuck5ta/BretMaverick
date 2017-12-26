@@ -138,10 +138,10 @@ WHEN Others Fold Force
 WHEN HaveNuts Raise FORCE
 
 // Test expectation via Pot Equity RAISE?
-// total out * 4 compared to break-even pot odds table
-WHEN (f$mh_nouts * 4 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
+//WHEN (f$mh_nouts * 4 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
 
 // Test expectation via Pot Odds Call / FOLD
+// total number of outs compared to break-even pot odds table
 WHEN f$PotOddsExpectation Call FORCE
 
 // IMPLIED ODDS
@@ -157,11 +157,14 @@ WHEN Others Fold Force
 WHEN HaveNuts Raise FORCE
 
 // Test expectation via Pot Equity RAISE?
-// total out * 2 compared to break-even pot odds table
 WHEN (f$mh_nouts * 2 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
 
 // Test expectation via Pot Odds Call / FOLD
+// total number of outs compared to break-even pot odds table
 WHEN f$PotOddsExpectation Call FORCE
+
+// SCARE OFF THE WEAK
+// if at least goodish hand, RAISE
 
 // We can do nothing - Texas Fold 'Em
 When Others Fold Force
@@ -206,19 +209,19 @@ NumberOfRaisesBeforeFlop > 1
 ##f$PotOddsExpectation##
 WHEN f$mh_nouts > 6 RETURN 1 FORCE // damn good chance
 WHEN f$mh_nouts == 2
-   WHEN ((AmountToCall / PotSize) * 100) >= 22 RETURN 1 FORCE
+   WHEN (PotSize / AmountToCall) >= 22 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 3
-   WHEN ((AmountToCall / PotSize) * 100) >= 14.3 RETURN 1 FORCE
+   WHEN (PotSize / AmountToCall) >= 14.3 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 4
-   WHEN ((AmountToCall / PotSize) * 100) >= 10.5 RETURN 1 FORCE
+   WHEN (PotSize / AmountToCall) >= 10.5 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 5
-   WHEN ((AmountToCall / PotSize) * 100) >= 8.2 RETURN 1 FORCE
+   WHEN (PotSize / AmountToCall) >= 8.2 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 6
-   WHEN ((AmountToCall / PotSize) * 100) >= 6.7 RETURN 1 FORCE
+   WHEN (PotSize / AmountToCall) >= 6.7 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN Others RETURN 0 FORCE
    
