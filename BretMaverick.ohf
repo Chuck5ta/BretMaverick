@@ -134,6 +134,7 @@ WHEN Others Fold Force
 ##f$flop##
 
 // If HaveNuts may not want to scare people off yet!!!
+// If no raises, call???
 WHEN HaveNuts Raise FORCE
 
 // Test expectation via Pot Equity RAISE?
@@ -152,6 +153,7 @@ WHEN Others Fold Force
 ##f$turn##
 
 // If HaveNuts may not want to scare people off yet!!!
+// If no raises, call???
 WHEN HaveNuts Raise FORCE
 
 // Test expectation via Pot Equity RAISE?
@@ -168,6 +170,8 @@ When Others Fold Force
 
 // Fuck 'em :)
 WHEN HaveNuts Raise FORCE
+
+// 2nd nuts (2nd best hand)
 
 
 // We can do nothing - Texas Fold 'Em
@@ -218,6 +222,23 @@ WHEN f$mh_nouts == 6
    WHEN Others RETURN 0 FORCE
 WHEN Others RETURN 0 FORCE
    
+// Hand strength
+
+// Our hand cannot be beaten
+##f$nuts##
+nhandshi == 0 || prwin > 0.97
+
+// we have 2nd highest hand 
+##f$2ndnuts##
+nhandshi == 1   
+
+// we have the 3rd highest hand
+##f$3rdnuts##
+nhandshi == 2   
+
+
+
+
 //*****************************************************************************
 //
 // Hand-lists for the BretMaverick-bot
