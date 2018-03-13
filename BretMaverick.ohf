@@ -134,14 +134,13 @@ WHEN Others Fold Force
 ##f$flop##
 
 // If HaveNuts may not want to scare people off yet!!!
-// If no raises, call???
 WHEN HaveNuts Raise FORCE
 
 // Test expectation via Pot Equity RAISE?
-//WHEN (f$mh_nouts * 4 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
+// total out * 4 compared to break-even pot odds table
+WHEN (f$mh_nouts * 4 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
 
 // Test expectation via Pot Odds Call / FOLD
-// total number of outs compared to break-even pot odds table
 WHEN f$PotOddsExpectation Call FORCE
 
 // IMPLIED ODDS
@@ -153,18 +152,14 @@ WHEN Others Fold Force
 ##f$turn##
 
 // If HaveNuts may not want to scare people off yet!!!
-// If no raises, call???
 WHEN HaveNuts Raise FORCE
 
 // Test expectation via Pot Equity RAISE?
+// total out * 2 compared to break-even pot odds table
 WHEN (f$mh_nouts * 2 + 1) > ((AmountToCall / PotSize) * 100) Raise FORCE
 
 // Test expectation via Pot Odds Call / FOLD
-// total number of outs compared to break-even pot odds table
 WHEN f$PotOddsExpectation Call FORCE
-
-// SCARE OFF THE WEAK
-// if at least goodish hand, RAISE
 
 // We can do nothing - Texas Fold 'Em
 When Others Fold Force
@@ -173,8 +168,6 @@ When Others Fold Force
 
 // Fuck 'em :)
 WHEN HaveNuts Raise FORCE
-
-// 2nd nuts (2nd best hand)
 
 
 // We can do nothing - Texas Fold 'Em
@@ -209,39 +202,22 @@ NumberOfRaisesBeforeFlop > 1
 ##f$PotOddsExpectation##
 WHEN f$mh_nouts > 6 RETURN 1 FORCE // damn good chance
 WHEN f$mh_nouts == 2
-   WHEN (PotSize / AmountToCall) >= 22 RETURN 1 FORCE
+   WHEN ((AmountToCall / PotSize) * 100) >= 22 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 3
-   WHEN (PotSize / AmountToCall) >= 14.3 RETURN 1 FORCE
+   WHEN ((AmountToCall / PotSize) * 100) >= 14.3 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 4
-   WHEN (PotSize / AmountToCall) >= 10.5 RETURN 1 FORCE
+   WHEN ((AmountToCall / PotSize) * 100) >= 10.5 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 5
-   WHEN (PotSize / AmountToCall) >= 8.2 RETURN 1 FORCE
+   WHEN ((AmountToCall / PotSize) * 100) >= 8.2 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN f$mh_nouts == 6
-   WHEN (PotSize / AmountToCall) >= 6.7 RETURN 1 FORCE
+   WHEN ((AmountToCall / PotSize) * 100) >= 6.7 RETURN 1 FORCE
    WHEN Others RETURN 0 FORCE
 WHEN Others RETURN 0 FORCE
    
-// Hand strength
-
-// Our hand cannot be beaten
-##f$nuts##
-nhandshi == 0 || prwin > 0.97
-
-// we have 2nd highest hand 
-##f$2ndnuts##
-nhandshi == 1   
-
-// we have the 3rd highest hand
-##f$3rdnuts##
-nhandshi == 2   
-
-
-
-
 //*****************************************************************************
 //
 // Hand-lists for the BretMaverick-bot
@@ -260,7 +236,7 @@ nhandshi == 2
 
 ##listLooseEarlyUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKo AQo AJo
 KQo
@@ -307,7 +283,7 @@ AKo
 // unraised pot
 ##listLooseMiddleUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKo AQo AKo AJo
 KQo
@@ -353,7 +329,7 @@ AKo
 // unraised pot
 ##listLooseLateUnraisedPotRaise##
 AA KK QQ JJ TT 99 88
-AKs AQs AKs AJs ATs A9s A8s
+AKs AQs AJs ATs A9s A8s
 KQs KJs KTs K9s
 QJs QTs
 JTs
@@ -376,7 +352,7 @@ JTo
 // Raised pot
 ##listLooseLateAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs AQs AKs AJs
+AKs AQs AJs
 KQs
 AKo
 
@@ -406,7 +382,7 @@ AKo
 // unraised pot
 ##listLooseSmallBlindUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKo AQo
 
@@ -421,7 +397,7 @@ JTs
 // Raised pot
 ##listLooseSmallBlindAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs AQs AKs AJs
+AKs AQs AJs
 KQs
 AKo
 
@@ -440,14 +416,14 @@ AKo
 // unraised pot
 ##listLooseBigBlindUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKo AQo
 
 // Raised pot
 ##listLooseBigBlindAgainstRaisedPotRaise##
 AA KK QQ JJ TT
-AKs AQs AKs AJs
+AKs AQs AJs
 KQs
 AKo
 
@@ -489,7 +465,7 @@ AKs
 AKo
 
 ##listTightEarlyAgainstRaisedPotCall##
-AQs AKs AJs
+AQs AJs
 KQs
 
 // raised then reraised pot
@@ -504,7 +480,7 @@ AKs
 // unraised pot
 ##listTightMiddleUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKo AQo AKo AJo
 KQo
@@ -526,7 +502,7 @@ AKs
 AKo
 
 ##listTightMiddleAgainstRaisedPotCall##
-AQs AKs AJs
+AQs AJs
 KQs
 
 // raised then reraised pot
@@ -541,7 +517,7 @@ AKs
 // unraised pot
 ##listTightLateUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs A9s A8s
+AKs AQs AJs ATs A9s A8s
 KQs KJs KTs
 QJs
 AKo AQo AKo AJo ATo
@@ -566,7 +542,7 @@ AKo
 
 ##listTightLateAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-AQs AKs AJs
+AQs AJs
 KQs
 QJs JTs T9s
 
@@ -582,7 +558,7 @@ AKs
 // unraised pot
 ##listTightSmallBlindUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKs AQs
 
@@ -602,7 +578,7 @@ AKo
 
 ##listTightSmallBlindAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-AQs AKs AJs
+AQs AJs
 KQs
 QJs QTs
 
@@ -613,7 +589,7 @@ QJs QTs
 // unraised pot
 ##listTightBigBlindUnraisedPotRaise##
 AA KK QQ JJ TT 99
-AKs AQs AKs AJs ATs
+AKs AQs AJs ATs
 KQs KJs
 AKs AQs
 
@@ -625,13 +601,13 @@ AKo
 
 ##listTightBigBlindAgainstRaisedPotCall##
 99 88 77 66 55 44 33 22
-AQs AKs AJs
+AQs AJs
 KQs
 QJs JTs T9s
 
 // Any Suited
 ##listSuited##
-AKs AQs AKs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
+AKs AQs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
 KQs KJs KTs K9s K8s K7s K6s K5s K4s K3s K2s
 QJs QTs Q9s Q8s Q7s Q6s Q5s Q4s Q3s Q2s
 JTs J9s J8s J7s J6s J5s J4s J3s J2s
@@ -648,7 +624,7 @@ T9s T8s T7s T6s T5s T4s T3s T2s
 // ALL HANDS
 ##listOfAllPreflopHands##
 AA KK QQ JJ TT 99 88 77 66 55 44 33 22
-AKs AQs AKs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
+AKs AQs AJs ATs A9s A8s A7s A6s A5s A4s A3s A2s
 KQs KJs KTs K9s K8s K7s
 QJs QTs Q9s Q8s Q7s
 JTs J9s J8s
